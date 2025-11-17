@@ -12,6 +12,7 @@ const Register = () => {
   const [formData , setFormData] = useState(init);
   const [backendResponse, setBackendResponse] = useState(null)
   const toast = useToast();
+  
   const handleChange = (e) =>{
     const {name, value} = e.target;
     let payload = {
