@@ -14,7 +14,7 @@ const Tasks = () => {
     try {
       const response = await apiBase("tasks");
       if ( response) {
-        setTasks(response);
+        setTasks(response?.data);
       }
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -29,6 +29,19 @@ const Tasks = () => {
     console.log("response", tasks)
 
 
+
+const handleDelete = async (id) => {
+  try {
+    const res = await apiBase(`tasks/${id}`, "delete");
+    console.log("Deleted:", res);
+    setTasks((prev) => prev.filter((task) => task._id !== id));
+  } catch (error) {
+    console.error("Delete error:", error);
+  }
+};
+
+
+
   return (
     <Box boxSizing='border-box' padding={"10px"}>
         <Box boxSizing='border-box' padding={"2"} display={"flex"} justifyContent={"right"}>
@@ -37,7 +50,7 @@ const Tasks = () => {
         <Box display={"flex"} gap={5} flexFlow={"wrap"}>
               {
                 tasks && tasks.map(item=>(
-                    <TasksComponent title={item.title} description={item.description} status={item.status} id={item._id}/>
+                    <TasksComponent title={item.title} description={item.description} status={item.status} id={item._id} onDelete={handleDelete}/>
                 ))
             }
         </Box>

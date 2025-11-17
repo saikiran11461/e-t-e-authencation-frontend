@@ -1,13 +1,15 @@
 import { Box, Input, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { apiBase } from '../Api/api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditTask = () => {
 
-    const [edit, setEdit] = useState({})
+const [edit, setEdit] = useState({})
 
 const {id} = useParams();
+
+const navigate = useNavigate()
 
 console.log("id in the edit", id)
 
@@ -38,7 +40,9 @@ console.log("id in the edit", id)
 
     let response = await apiBase(`tasks/${id}`, "patch" , edit)
 
-    console.log("EditTask",response)
+    if(response?.status === 202){
+       navigate("/tasks")
+    }
   }
 
    return (

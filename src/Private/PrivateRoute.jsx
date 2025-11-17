@@ -10,7 +10,7 @@ const PrivateRoute = ({children}) => {
     const checkingAuth = async()=>{
         let response = await apiBase("users/check-auth")
          console.log(response)
-         if(response){
+         if(response?.data){
             setResponse(response)
          }
     }
@@ -23,11 +23,11 @@ if(response == null){
     return <LoadingSpinner/>
 }
 
- if(response?.authenticated){
+ if(response?.data?.authenticated){
     return children
  }
 
-  return <Navigate to="/login" replace />
+   return <Navigate to="/login" replace />
 
 }
 

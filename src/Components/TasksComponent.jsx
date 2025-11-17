@@ -1,21 +1,12 @@
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { BiSolidMessageSquareEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { apiBase } from "../Api/api";
 
-const TasksComponent = ({title, description, status,id}) => {
+const TasksComponent = ({title, description, status,id, onDelete}) => {
 
   
-  const handleDelete = async(id)=>{
-    let res =await apiBase(`tasks/${id}`, "delete")
-    console.log(res)
-  }
-
-
-
-
  
   return (
     <Box
@@ -36,7 +27,7 @@ const TasksComponent = ({title, description, status,id}) => {
           <Link to={`/edittask/${id}`}><BiSolidMessageSquareEdit size={25} color="red" /></Link>
         </Box>
         <Box position={"absolute"} top={"10"} right={"4"}>
-          <MdDelete onClick={()=>handleDelete(id)} size={27} color="red" />
+          <MdDelete onClick={()=>onDelete(id)} size={27} color="red" />
         </Box>
       </Box>
       <Box>

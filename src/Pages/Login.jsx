@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Input, Stack, useToast } from "@chakra-ui/react";
 import { apiBase } from '../Api/api';
+import {useNavigate} from "react-router-dom"
 const Login = () => {
 
   const init ={
@@ -10,6 +11,7 @@ const Login = () => {
     const [formData , setFormData] = useState(init);
     const [backendResponse, setBackendResponse] = useState(null)
     const toast = useToast();
+    const navigate = useNavigate()
   
     const handleChange = (e) =>{
       const {name, value} = e.target;
@@ -25,9 +27,15 @@ const Login = () => {
     const handleSubmit =async(e)=>{
       e.preventDefault()
       let response = await apiBase("users/login", "post", formData);
+      console.log(response.status)
       if(response?.message){
         setBackendResponse(response?.message)
       }
+
+      if(response.status === 200){
+         navigate("/")
+      }
+
     }
    
   

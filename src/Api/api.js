@@ -3,7 +3,7 @@
 import axios from "axios"
 
 
-let BASE_API = "http://localhost:2345"
+let BASE_API = process.env.REACT_APP_API_URL
 
 export const apiBase = async(route ,method, payload)=>{
     console.log(route,method)
@@ -18,7 +18,7 @@ export const apiBase = async(route ,method, payload)=>{
     }
 
     let response = await axios(options);
-    return response.data
+    return response
 
     } catch (error) {
         console.error("API Error:", error);

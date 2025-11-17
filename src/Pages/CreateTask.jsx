@@ -1,6 +1,7 @@
 import { Box, Input, Stack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { apiBase } from '../Api/api';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTask = () => {
 
@@ -13,6 +14,7 @@ const CreateTask = () => {
   }
 
   const [formData ,setFormData ] = useState(init);
+  const navigate = useNavigate()
 
   const handleChange = (e) =>{
       const {name,value} = e.target;
@@ -30,7 +32,9 @@ const CreateTask = () => {
 
     let response = await apiBase("tasks/create", "post" , formData)
 
-    console.log("createTask",response)
+     if(response?.status === 201){
+       navigate("/tasks")
+     }
   }
 
    return (
