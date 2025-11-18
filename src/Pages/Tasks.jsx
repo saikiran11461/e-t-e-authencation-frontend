@@ -32,7 +32,7 @@ const Tasks = () => {
 
 const handleDelete = async (id) => {
   try {
-    const res = await apiBase(`tasks/${id}`, "delete");
+     await apiBase(`tasks/${id}`, "delete");
     setTasks((prev) => prev.filter((task) => task._id !== id));
   } catch (error) {
     console.error("Delete error:", error);
