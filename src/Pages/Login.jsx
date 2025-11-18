@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Input, Stack, useToast } from "@chakra-ui/react";
 import { apiBase } from '../Api/api';
 import {useNavigate} from "react-router-dom"
+import LoadingSpinner from '../Components/LoadingSpinner';
 const Login = () => {
 
   const init ={
@@ -9,7 +10,8 @@ const Login = () => {
       password:""
     }
     const [formData , setFormData] = useState(init);
-    const [backendResponse, setBackendResponse] = useState(null)
+    const [backendResponse, setBackendResponse] = useState(null);
+    const [loading ,setLoading] = useState(null)
     const toast = useToast();
     const navigate = useNavigate()
   
@@ -26,11 +28,14 @@ const Login = () => {
   
     const handleSubmit =async(e)=>{
       e.preventDefault()
+      setLoading(true)
       let response = await apiBase("users/login", "post", formData);
       console.log(response.status)
       if(response?.message){
         setBackendResponse(response?.message)
       }
+
+      setLoading(false)
 
       if(response.status === 200){
          navigate("/")
@@ -41,6 +46,7 @@ const Login = () => {
   
   return (
      <Box >
+      {loading && <LoadingSpinner/>}
       <Box  width={"30%"} margin={"auto"} mt={"100px"}>
           <form onSubmit={handleSubmit}>
         <Stack gap="2">
