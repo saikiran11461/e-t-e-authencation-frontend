@@ -27,7 +27,7 @@ const Register = () => {
   const handleSubmit =async(e)=>{
     e.preventDefault()
     let response =await apiBase("users/register", "post", formData);
-     console.log("response register",response)
+    
      if(response?.message){
       setBackendResponse(response?.message)
      }

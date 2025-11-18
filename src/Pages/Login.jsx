@@ -30,7 +30,6 @@ const Login = () => {
       e.preventDefault()
       setLoading(true)
       let response = await apiBase("users/login", "post", formData);
-      console.log(response.status)
       if(response?.message){
         setBackendResponse(response?.message)
       }

@@ -26,14 +26,13 @@ const Tasks = () => {
   
 }, []);
 
-    console.log("response", tasks)
+   
 
 
 
 const handleDelete = async (id) => {
   try {
     const res = await apiBase(`tasks/${id}`, "delete");
-    console.log("Deleted:", res);
     setTasks((prev) => prev.filter((task) => task._id !== id));
   } catch (error) {
     console.error("Delete error:", error);

@@ -6,7 +6,7 @@ import axios from "axios"
 let BASE_API = process.env.REACT_APP_API_URL
 
 export const apiBase = async(route ,method, payload)=>{
-    console.log(route,method)
+   
     try {
        
     const options = {
@@ -21,7 +21,6 @@ export const apiBase = async(route ,method, payload)=>{
     return response
 
     } catch (error) {
-        console.error("API Error:", error);
         throw error.response ? error.response.data : error;
     }
 }
