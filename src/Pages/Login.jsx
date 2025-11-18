@@ -11,7 +11,7 @@ const Login = () => {
     }
     const [formData , setFormData] = useState(init);
     const [backendResponse, setBackendResponse] = useState(null);
-    const [loading ,setLoading] = useState(null)
+    const [loading ,setLoading] = useState(false)
     const toast = useToast();
     const navigate = useNavigate()
   
